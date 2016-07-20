@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="uft-8">
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" type="text/css" href="{% static "styles/bootstrap.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "styles/main.css" %}">
+		<title>Metoo - connecting cool people</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<ul class="nav nav-pills pull-right">
+					<li class=""><a href="{% url 'profileIndex' %}">{{profile_logged.name}}</a></li>
+					<li class=""><a href="/logout/">Logout</a></li>
+				</ul>
+				<h3>Metoo</h3>
+			</div>
+
+			<div class="row content">
+			{% block body %}
+
+			{% endblock %}	
+			</div>
+
+		</div>
+	</body>
+</html>

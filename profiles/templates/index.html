@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block body %}
+	<div class="col-lg-12">
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>All Profiles</strong>
+			</div>
+			{% if profiles %}
+			<ul>
+				{% for profile in profiles %}
+					<li>
+						<a href="{% url 'profileDetails' profile.id %}">{{ profile.name }}</a>
+						/ {{profile.email}}
+					</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+				<p>No profile found</p>
+			{% endif %}
+		</div>
+
+		<div class="panel panel-default">
+		{% with total_invites=profile_logged.received.count %}
+			{% if profile_logged.sent.count %}
+			<div class="panel-heading">
+				<strong>
+					You have {{profile_logged.received.count }} invite {{profile_logged.received.count|pluralize}} waiting accept
+				</strong>
+			</div>
+			<ul class="list-group">
+				{% for invite in profile_logged.received.all %}
+				<li class="list-group-item">
+					{{ invite.requester.name }}
+					<a href="{% url 'profileAccept' invite.id %}" class="pull-right">Accept</a>
+				</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<div class="panel-body">
+				 <p>No invites received :(</p>
+			</div>
+			{% endif %}
+		{% endwith %}			
+		</div>
+
+
+		<div class="panel panel-default">
+		{% with total_contacts=profile_logged.contacts.count %}
+			{% if total_contacts %}
+				<div class="panel-heading">
+					<strong>
+						You have {{total_contacts}} contacts
+						{{total_contacts|pluralize}}
+					</strong>
+				</div>
+				<ul class="list-group">
+					{% for contact in profile_logged.contacts.all %}
+					<a href="{% url 'profileDetails' contact.id %}" class="list-group-item">
+						{{contact.name}} // {{contact.email}}
+					</a>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<div class="panel-body">
+					 <p>No invites received :(</p>
+				</div>
+			{% endif %}
+		{% endwith %}			
+		</div>
+
+	</div>
+{% endblock %}
