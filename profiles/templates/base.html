@@ -12,8 +12,8 @@
 		<div class="container">
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
-					<li class=""><a href="{% url 'profileIndex' %}">{{profile_logged.name}}</a></li>
-					<li class=""><a href="/logout/">Logout</a></li>
+					<li class=""><a href="{% url 'profileIndex' %}">{{user.profile.name}}</a></li>
+					<li class=""><a href="{% url 'logout' %}">Logout</a></li>
 				</ul>
 				<h3>Metoo</h3>
 			</div>
